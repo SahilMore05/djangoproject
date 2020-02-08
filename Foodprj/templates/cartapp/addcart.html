@@ -1,0 +1,46 @@
+<html>
+	<head>
+		{% load static %}
+		<title>Add To Cart</title>
+		<script src='{% static "scripts/jquery.min.js" %}'></script>
+	</head>
+	<body>
+		
+		{% include 'header.html' %}	
+		<form name="form" action="/cartapp/addToCart" method="POST">
+			<script>
+				$(document).ready(function(){
+					$("#Quantity").blur(function(){
+						console.log("in on blur")
+						var Quantity=$('#Quantity').val()
+						var foodIdfk=$('#foodIdfk').val()
+						$.get('/cartapp/check',{'foodQuantity':Quantity,'foodIdfk':foodIdfk},function(data){
+							alert(data);
+						});
+					});
+				});
+			</script>
+			{% csrf_token %}
+			<table border="10px" cellpadding="8px" cellspacing="3px" bordercolor="pink">
+				<tr>
+					<caption>AddCart</caption>
+					<td>FoodId:</td>
+					<td><input type="text" style="margin_left: 20%;" id="foodIdfk"
+							   placeholder="Identifiant" name="foodIdfk" value="{{foodIdfk}}" readonly/></td>
+				</tr>
+				<tr>
+					<td>EmailId:</td>
+					<td><input type="text" style="margin_left: 20%;"
+							   placeholder="Identifiant" name="emailIdfk" value="{{request.session.Email}}" readonly/></td>
+				</tr>
+				<tr>
+					<td>Food Quantity:</td>
+					<td><input type="text" style="margin_left: 20%;" id="Quantity"
+							   placeholder="Identifiant" name="Quantity"/></td>
+				</tr>
+			</table>
+			<input type="submit" value="submit"><input type="reset" value="reset" value="clear">
+		</form>
+		{% include 'footer.html' %}
+	</body>
+</html>

@@ -1,0 +1,28 @@
+{% load static %}
+<html>
+    <head>
+        <title>Orders</title>
+    </head>
+    <body>
+        <header>
+        	{% include "header.html" %}
+        </header>
+            <table border="10px" cellpadding="8px" cellspacing="3px" bordercolor="pink">
+                <caption><h3>Orders for {{ request.session.Email }}</h3></caption>
+                <tr>
+                    <th>ID</th>
+                     <th>Total Bill</th>
+                     <th>Order Date</th>
+                </tr>
+                {% for o in orders %}
+                <tr>
+                    <td>{{ o.emailIdfk }}</td>
+                    <td>{{ o.total }}</td>
+                    <td>{{ o.date }}</td>
+                </tr>
+                {% endfor %}
+        </table>
+        {% csrf_token %}
+		{% include 'footer.html' %}
+    </body>
+</html>

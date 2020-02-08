@@ -1,0 +1,19 @@
+{% load static %}
+<script src='{% static "scripts/jquery.min.js" %}'></script>
+{% if request.session.Email %}
+<h2> Welcome , {{ request.session.Email }}</h2>
+{% else %}
+<h2> Welcome , Guest</h2>
+{% endif %}
+{% if request.session.Email %}
+	<a href='/Foodapp/foods'>Home</a>
+	<a href='/userapp/logoutuser'>Logout</a>
+	<a href='/cartapp/showCart'>My Cart</a>
+	<a href='/orderapp/showorder'>Order</a>
+	{% if request.session.utype == 'Admin' %}
+		<a href='/userapp/users'>All Users</a>
+	{% endif %}
+{% else %}
+	<a href='/userapp/loginuser'>Sign In</a>
+	<a href='/userapp/adduser'>Sign Up</a>
+{% endif %}

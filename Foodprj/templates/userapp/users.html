@@ -1,0 +1,29 @@
+{% load static %}
+{% include 'header.html' %}
+
+<center>
+<table border="10px" cellpadding="8px" cellspacing="3px" bordercolor="pink">
+	<tr>
+		<th>Id</th>
+		<th>Email</th>
+		<th>Password</th>
+		<th>Action</th>
+	</tr>
+	{% if users %}
+		{% for u in users %}
+			<tr>
+				<td>{{u.id}}</td>
+				<td>{{u.Email}}</td>
+				<td>{{u.Password}}</td>
+				<td><a href='/userapp/updateuser/{{u.id}}'><img src='/static/images/edit.png' width='30' height='30' alt='Update User'></a></td>
+				<td><a href='/userapp/delete/{{u.id}}'><img src='/static/images/delete.png' width='30' height='30' alt='Delete User'></a></td>
+			</tr>
+		{% endfor %}
+	{% endif %}
+	<tr>
+		<td><a href='/userapp/users'><img src='/static/images/users.png' width='50' height='50' alt='All 	User'></a></td>
+		<td><a href='/userapp/adduser'><img src='/static/images/add.png' width='50' height='50' alt='Add User'></a></td>
+	</tr>
+</table>
+</center>
+{% include 'footer.html' %}

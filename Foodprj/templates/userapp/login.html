@@ -1,0 +1,16 @@
+{% load static %}
+{% include 'header.html' %}
+<form method='POST'>
+	<span style="color:red">{{error}}</span>
+	<center><caption> LOG IN HERE </caption></center>
+	&nbsp;
+	<center>
+	<table border="10px" cellpadding="8px" cellspacing="3px" bordercolor="pink">
+		{{form.as_table}}
+	</table>
+	</center>&nbsp;
+	<center><input type='submit' value='Login'></center>
+	{% csrf_token %}
+	
+</form>
+{% include 'footer.html' %}

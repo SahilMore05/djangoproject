@@ -1,0 +1,10 @@
+<form method='POST'>
+	<center>
+	<table border="10px" cellpadding="8px" cellspacing="3px" bordercolor="pink">
+		{{form.as_table}}
+	</table>
+	</center>
+	<center><input type='submit' value='Add User'></center>
+	{% csrf_token %}
+	
+</form>
