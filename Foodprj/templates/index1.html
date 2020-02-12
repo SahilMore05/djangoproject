@@ -1,19 +1,37 @@
+<html>
+<head>
 {% load static %}
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src='{% static "scripts/jquery.min.js" %}'></script>
-{% if request.session.Email %}
-<h2> Welcome , {{ request.session.Email }}</h2>
-{% else %}
-<h2> Welcome , Guest</h2>
-{% endif %}
-{% if request.session.Email %}
-	<a href='/Foodapp/foods'>Home</a>
-	<a href='/userapp/logoutuser'>Logout</a>
-	<a href='/cartapp/showCart'>My Cart</a>
-	<a href='/orderapp/showorder'>Order</a>
-	{% if request.session.utype == 'Admin' %}
-		<a href='/userapp/users'>All Users</a>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<div>
+	<img src="/static/images/food_plaza_logo.jpg" width="20%" height="25%">
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+	<li class="nav-item active"><a class="nav-link" href="/Foodapp/foods"><b>Home</b></a></li>
+	<li class="nav-item active"><a class="nav-link" href="/Foodapp/foods"><b>Food Menu</b></a></li>
+	{% if request.session.utype is None %}
+	<li class="nav-item active"><a class="nav-link" href="/userapp/loginuser"><b>Login</b></a></li>
+	<li class="nav-item active"><a class="nav-link" href="/userapp/adduser"><b>Register</b></a></li>
 	{% endif %}
-{% else %}
-	<a href='/userapp/loginuser'>Sign In</a>
-	<a href='/userapp/adduser'>Sign Up</a>
-{% endif %}
+	{% if request.session.utype == "admin" %}
+	<li class="nav-item active"><a class="nav-link" href="/Foodapp/addfood"><b>Add Food</b></a></li>
+	<li class="nav-item active"><a class="nav-link" href="/userapp/users"><b>Customers</b></a></li>
+	<li class="nav-item active"><a class="nav-link" href="/userapp/logoutuser"><b>Logout</b></a></li>
+	{% endif %}
+	{% if request.session.utype == "user" %}
+	<li class="nav-item active"><a class="nav-link" href="/userapp/updateuser/"><b>Update Profile</b></a></li>
+	<li class="nav-item active"><a class="nav-link" href="/cartapp/showCart"><b>My Cart</b></a></li>
+	<li class="nav-item active"><a class="nav-link" href='/orderapp/showorder'><b>Order</b></a></li>
+	<li class="nav-item active"><a class="nav-link" href="/userapp/logoutuser"><b>Logout</b></a></li>
+	{% endif %}
+	<li class="nav-item active"><a class="nav-link" href="#"><b>Contact Us</b></a></li>
+</ul>
+</nav>
+</body>
+</html>

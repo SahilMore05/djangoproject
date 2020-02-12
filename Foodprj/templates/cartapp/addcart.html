@@ -6,8 +6,9 @@
 	</head>
 	<body>
 		
-		{% include 'header.html' %}	
-		<form name="form" action="/cartapp/addToCart" method="POST">
+		{% include 'index1.html' %}
+		<center>
+		<form name="form" action="/cartapp/addToCart" method="POST" class="container">
 			<script>
 				$(document).ready(function(){
 					$("#Quantity").blur(function(){
@@ -21,7 +22,7 @@
 				});
 			</script>
 			{% csrf_token %}
-			<table border="10px" cellpadding="8px" cellspacing="3px" bordercolor="pink">
+			<table class="table>
 				<tr>
 					<caption>AddCart</caption>
 					<td>FoodId:</td>
@@ -38,9 +39,13 @@
 					<td><input type="text" style="margin_left: 20%;" id="Quantity"
 							   placeholder="Identifiant" name="Quantity"/></td>
 				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="submit" class="btn btn-primary"><input type="reset" value="reset" value="clear" class="btn btn-primary"></td>
+				</tr>
 			</table>
-			<input type="submit" value="submit"><input type="reset" value="reset" value="clear">
 		</form>
-		{% include 'footer.html' %}
+		</center>
+		{% include 'footer1.html' %}
 	</body>
 </html>

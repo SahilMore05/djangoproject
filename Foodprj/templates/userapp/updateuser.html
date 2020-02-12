@@ -1,8 +1,9 @@
+<center>
 {% load static %}
-{% include 'header.html' %}
+{% include 'index1.html' %}
 <form method='POST'>
 	<center>
-	<table border="10px" cellpadding="8px" cellspacing="3px" bordercolor="pink">
+	<table class="table">
 		{{form.as_table}}
 	</table>
 	</center>
@@ -10,4 +11,5 @@
 	{% csrf_token %}
 	
 </form>
-{% include 'footer.html' %}
+{% include 'footer1.html' %}
+</center>

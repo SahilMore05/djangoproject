@@ -1,13 +1,18 @@
 {% load static %}
-{% include 'header.html' %}
-<form method='POST'>
+{% include 'index1.html' %}
+<form method='POST' class="container">
 	<center>
-	<table border="10px" cellpadding="8px" cellspacing="3px" bordercolor="pink">
+		<caption><h3>Add Food</h3></caption>
+	<table class="table">
 		{{form.as_table}}
+		<tr>
+			<td></td>
+			<td><input type='submit' class="btn btn-primary" value='Add Food'></td>
+		</tr>
 	</table>
 	</center>
-	<center><input type='submit' value='Add Food'></center>
+
 	{% csrf_token %}
 	
 </form>
-{% include 'header.html' %}
+{% include 'footer1.html' %}

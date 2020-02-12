@@ -10,6 +10,7 @@ from orderapp.forms import OrderForm
 # Create your views here.
 def showOrderView(request):
 	Email = request.session['Email']
+	orderDate= datetime.date.today()
 	orders = OrderModel.objects.filter(emailIdfk=Email)
 	print(orders)
 	return render(request,'orderapp/order.html',{'orders':orders})
@@ -20,7 +21,7 @@ def placeOrderView(request):
 		Email=request.session['Email']
 		orderDate=datetime.date.today()
 		cursor=connection.cursor()
-		tbill=cursor.execute('SELECT SUM(f.price*c.quantity) FROM Foodapp_foodmodel as f INNER JOIN cart_tbl as c ON f.id=c.foodIdfk and c.emailIdfk=%s',[Email])
+		tbill=cursor.execute('SELECT SUM(f.price*c.Quantity) FROM Foodapp_foodmodel as f INNER JOIN cart_tbl as c ON f.id=c.foodIdfk and c.emailIdfk=%s',[Email])
 		total=float(cursor.fetchone()[0])
 		insertSql='INSERT INTO order_tbl(total,date,emailIdfk) values ("%f","%s","%s")'%(total,orderDate,Email)
 		cursor.execute(insertSql)
@@ -41,3 +42,9 @@ def placeOrderView(request):
 		CartModel.objects.filter(emailIdfk=Email).delete()
 		return redirect('/Foodapp/foods')
 	return render(request,'orderapp/order.html',{'form':form})
+	
+def deleteOrder(request,id):
+	print('deleteUserByIdView')
+	foundOrder=OrderModel.objects.get(id=id)
+	foundOrder.delete()
+	return redirect('/orderapp/order')

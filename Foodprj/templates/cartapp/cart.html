@@ -1,15 +1,18 @@
 <html>
 	<head>
-		{% include 'header.html' %}
+		{% include 'index1.html' %}
+
 	</head>
 	<body>
 		<form name="form" action="/orderapp/order" method="POST">
 			{% load static %}
 			{% csrf_token %}
 			<center>
-			<table border="10px" cellpadding="8px" cellspacing="3px" bordercolor="pink">
-			{% if cart %}
 				<caption><h1>Cart List</h1></caption>
+			</center>
+			<table class="table">
+			{% if cart %}
+				<thead class="thead-light">
 				<tr>
 					<th>Food Id</th>
 					<th>Food Name</th>
@@ -17,6 +20,8 @@
 					<th>Cart Quantity</th>
 					<th>Action</th>
 				</tr>
+				</thead>
+				<tbody>
 				{% for c in cart %}
 				<tr>
 					<td>{{c.id}}</td>
@@ -26,13 +31,16 @@
 					<td><a href='/cartapp/delete/{{c.id}}'><img src='/static/images/delete.png' width='30' height='30' alt='Delete Food'></a></td>
 				</tr>
 				{% endfor %}
-			</table>
+				<tbody>
+			</table><br><br>
+			<center>
+				<input type="submit" class="btn btn-primary" value="palce order">
 			</center>
-			<input type="submit" value="palce order">
+
 			{% else %}
 				<h1>CART IS EMPTY</h1>
 			{% endif %}
-			{% include 'footer.html' %}
+			{% include 'footer1.html' %}
 		</form>
 	</body>
 </html>

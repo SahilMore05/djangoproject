@@ -1,8 +1,9 @@
 <html>
 {% load static %}
-{% include 'header.html' %}
+{% include 'index1.html' %}
 <head>
 	<script src='{% static "scripts/jquery.min.js" %}'></script>
+
 </head>
 <body>
 	<br><br>
@@ -18,7 +19,6 @@
 	$(document).ready(function(){
 		$("#food").blur(function(){
 			$("#ss").html("");
-			alert("hello");
 			var url="/Foodapp/search/"+$("#food").val();
 			$.get(url,function(data,status){
 				$.each(data,function(obj){
@@ -45,14 +45,14 @@
 
 		<caption>Search Food Here: <input type="text" id="food"></caption></center>&nbsp;
 	<center>
-	<table id="t" border="5px" cellpadding="5px" cellspacing="2px" bordercolor="green">
-	<thead>
+	<table class="table">
+	<thead class="thead-light">
 		<tr>
 			<th>Id</th>
 			<th>Name</th>
 			<th>Price</th>
 			<th>Quantity</th>
-			<th>Action</th>
+			<th colspan="2">Action</th>
 		</tr>
 	</thead>
 	<tbody id="ss">
@@ -63,25 +63,25 @@
 					<td>{{f.name}}</td>
 					<td>{{f.price}}</td>
 					<td>{{f.quantity}}</td>
-					{% if request.session.Email %}
+					{% if request.session.utype == 'user' %}
 						<td><a href='/cartapp/addToCart/{{f.id}}'><img src='/static/images/cart.png' width='30' height='30' alt='Add to Cart'></a></td>
-						{% if request.session.utype == 'Admin' %}
-							<td><a href='/Foodapp/updatefood/{{f.id}}'><img src='/static/images/edit.png' width='30' height='30' alt='Update Food'></a></td>
-							<td><a href='/Foodapp/delete/{{f.id}}'><img src='/static/images/delete.png' width='30' height='30' alt='Delete Food'></a></td>
-						{% endif %}
+					{% endif %}	
+					{% if request.session.utype == 'admin' %}
+						<td><a href='/Foodapp/updatefood/{{f.id}}'><img src='/static/images/edit.png' width='30' height='30' alt='Update Food'></a></td>
+						<td><a href='/Foodapp/delete/{{f.id}}'><img src='/static/images/delete.png' width='30' height='30' alt='Delete Food'></a></td>
 					{% endif %}
 				</tr>
 			{% endfor %}
 		{% endif %}
 		<tr>
 			<td><a href='/Foodapp/foods'><img src='/static/images/foods.png' width='50' height='50' alt='All Food'></a></td>
-			{% if request.session.utype == 'Admin' %}
+			{% if request.session.utype == 'admin' %}
 				<td><a href='/Foodapp/addfood'><img src='/static/images/add.png' width='50' height='50' alt='Add Food'></a></td>
 			{% endif %}
 		</tr>
 	</tbody>
 	</table>
+	{% include 'footer1.html' %}
 	</center>
-{% include 'footer.html' %}
 </body>
 </html>

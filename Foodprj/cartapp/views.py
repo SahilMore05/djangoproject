@@ -20,7 +20,7 @@ def checkQuantityBeforeAdding(request):
 	
 def showCartView(request):
 	Email=request.session['Email']
-	cart=CartModel.objects.raw('select c.id,f.name,c.Quantity from cart_tbl as c INNER JOIN Foodapp_foodmodel as f ON f.id=c.foodIdfk and c.emailIdfk==%s',[Email])
+	cart=CartModel.objects.raw('select c.id,f.name,f.price,c.Quantity from cart_tbl as c INNER JOIN Foodapp_foodmodel as f ON f.id=c.foodIdfk and c.emailIdfk==%s',[Email])
 	return render(request,'cartapp/cart.html',{'cart':cart})
 
 def showAddToCartView(request,id):

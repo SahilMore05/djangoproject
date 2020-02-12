@@ -1,16 +1,32 @@
 {% load static %}
-{% include 'header.html' %}
-<form method='POST'>
-	<span style="color:red">{{error}}</span>
-	<center><caption> LOG IN HERE </caption></center>
-	&nbsp;
-	<center>
-	<table border="10px" cellpadding="8px" cellspacing="3px" bordercolor="pink">
-		{{form.as_table}}
-	</table>
-	</center>&nbsp;
-	<center><input type='submit' value='Login'></center>
-	{% csrf_token %}
-	
-</form>
-{% include 'footer.html' %}
+{% include 'index1.html' %}
+	<br/>
+	<br/>
+	<form method="POST" class="container">
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label" >User Type</label>
+			<div class="col-sm-10">
+				<input type="radio" name="utype" value="user"/>User
+				<input type="radio" name="utype" value="admin"/>Admin<br/>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="Email" class="col-sm-2 col-form-label" >Email Address</label>
+			<div class="col-sm-10">
+				<input type="Email" class="form-control" name="Email" id="Email"><span style="color:red"></span><br/>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="Password" class="col-sm-2 col-form-label" >Password</label>
+			<div class="col-sm-10">
+				<input type="Password" class="form-control" name="Password" id="Password"><br/>
+			</div>
+		</div>
+		<div>
+			<input type='submit' class="btn btn-primary" value='login'>
+		</div>
+		{% csrf_token %}
+	</form>
+	<br/>
+	<br/>
+{% include 'footer1.html' %}

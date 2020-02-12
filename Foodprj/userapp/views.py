@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from userapp.models import UserModel
+from userapp.models import UserModel,AdminModel
 from userapp.forms import UserForm
 
 # Create your views here.
@@ -43,23 +43,38 @@ def updateUserByIdView(request,id):
 	return render(request,'userapp/updateuser.html',{'form':form})
 
 def loginView(request):
-	print("In loginView")
-	userform=UserForm()
+	form=UserForm()
 	if request.method=='POST':
-		userform=UserForm(request.POST)
-		if userform.is_valid():
+		form=UserForm(request.POST)
+		if form.is_valid():
+			print("valid")
 			Email=request.POST['Email']
 			Password=request.POST['Password']
-			userType=request.POST['userType']
-			allUsers=UserModel.objects.raw('SELECT * FROM userapp_UserModel')
-			for u in allUsers:
-				if u.Email==Email and u.Password==Password and u.userType==userType:
-					request.session['Email']=Email
-					request.session['utype']=userType
-					return redirect('/Foodapp/foods')
-			return render(request,'userapp/login.html',{'form':userform,'error':'Bad Credentials'})
-				
-	return render(request,'userapp/login.html',{'form':userform})
+			userType=request.POST['utype']
+			if userType == "admin" :
+				print("in admin")
+				admin=AdminModel.objects.raw('select * from userapp_AdminModel')
+				for a in admin:
+					if a.Email==Email and a.Password==Password:
+						request.session['Email']=Email
+						request.session['utype']="admin"
+						return redirect('/Foodapp/foods')
+			elif userType == "user":
+				allusers=UserModel.objects.raw('select * from userapp_UserModel')
+				for u in allusers:
+					#if u.email==email and u.password==password and u.utype==userType:
+					if u.Email==Email and u.Password==Password:	
+						request.session['Email']=Email
+						request.session['utype']="user"
+						print(request.session['utype'])
+						return redirect('/Foodapp/foods')
+				return render(request,'userapp/login.html',{'form':form,'error':'Bad credentials'})	
+			else:
+				return render(request,'userapp/login.html',{'form':form,'error':'Bad credentials'})
+		#else:
+			#print("Hi...")
+	return render(request,'userapp/login.html',{'form':form})
+
 
 def logoutView(request):
 	request.session.clear()

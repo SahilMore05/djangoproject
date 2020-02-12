@@ -1,0 +1,32 @@
+{% load static %}
+{% include 'index1.html' %}
+
+<center>
+<table class="table">
+	<thead class="thead-light">
+	<tr>
+		<th>Id</th>
+		<th>Email</th>
+		<th>Password</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% if admin %}
+		{% for a in admin %}
+			<tr>
+				<td>{{a.id}}</td>
+				<td>{{a.AdminEmail}}</td>
+				<td>{{a.AdminPassword}}</td>
+				<td><a href='/userapp/updateuser/{{u.id}}'><img src='/static/images/edit.png' width='30' height='30' alt='Update User'></a></td>
+				<td><a href='/userapp/delete/{{u.id}}'><img src='/static/images/delete.png' width='30' height='30' alt='Delete User'></a></td>
+			</tr>
+		{% endfor %}
+	{% endif %}
+	<tr>
+		<td><a href='/userapp/users'><img src='/static/images/users.png' width='50' height='50' alt='All User'></a></td>
+		<td><a href='/userapp/adduser'><img src='/static/images/add.png' width='50' height='50' alt='Add User'></a></td>
+	</tr>
+	</tbody>
+</table>
+</center>
+{% include 'footer1.html' %}

@@ -4,25 +4,35 @@
         <title>Orders</title>
     </head>
     <body>
+		<center>
         <header>
-        	{% include "header.html" %}
+        	{% include "index1.html" %}
         </header>
-            <table border="10px" cellpadding="8px" cellspacing="3px" bordercolor="pink">
+            <table class="table">
+                <thead>
                 <caption><h3>Orders for {{ request.session.Email }}</h3></caption>
                 <tr>
                     <th>ID</th>
-                     <th>Total Bill</th>
-                     <th>Order Date</th>
+					<th>Email</th>
+                    <th>Total Bill</th>
+                    <th>Order Date</th>
+					<th>Action</th>
                 </tr>
+                </thead>
+                <tbody>
                 {% for o in orders %}
                 <tr>
+					<td>{{ o.id }}</td>
                     <td>{{ o.emailIdfk }}</td>
                     <td>{{ o.total }}</td>
                     <td>{{ o.date }}</td>
+					<td><a href='/orderapp/delete/{{o.id}}'><img src='/static/images/delete.png' width='30' height='30' alt='Delete Order'></a></td>
                 </tr>
                 {% endfor %}
+                </tbody>
         </table>
-        {% csrf_token %}
-		{% include 'footer.html' %}
+		{% csrf_token %}
+		{% include 'footer1.html' %}
+		</center>
     </body>
 </html>

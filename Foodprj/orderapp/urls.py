@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from orderapp.views import placeOrderView,showOrderView
+from orderapp.views import placeOrderView,showOrderView,deleteOrder
 
 urlpatterns = [
 	path('order',placeOrderView),
 	path('showorder/', showOrderView),
+	path('delete/<int:id>',deleteOrder),
    
 ]

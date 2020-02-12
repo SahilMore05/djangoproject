@@ -1,14 +1,17 @@
 {% load static %}
-{% include 'header.html' %}
+{% include 'index1.html' %}
 
 <center>
-<table border="10px" cellpadding="8px" cellspacing="3px" bordercolor="pink">
-	<tr>
+<table class="table">
+	<thead class="thead-light">
+	<tr >
 		<th>Id</th>
 		<th>Email</th>
 		<th>Password</th>
-		<th>Action</th>
+		<th colspan="2">Action</th>
 	</tr>
+	</thead>
+	<tbody>
 	{% if users %}
 		{% for u in users %}
 			<tr>
@@ -21,9 +24,10 @@
 		{% endfor %}
 	{% endif %}
 	<tr>
-		<td><a href='/userapp/users'><img src='/static/images/users.png' width='50' height='50' alt='All 	User'></a></td>
+		<td><a href='/userapp/users'><img src='/static/images/users.png' width='50' height='50' alt='All User'></a></td>
 		<td><a href='/userapp/adduser'><img src='/static/images/add.png' width='50' height='50' alt='Add User'></a></td>
 	</tr>
+	</tbody>
 </table>
+{% include 'footer1.html' %}
 </center>
-{% include 'footer.html' %}
